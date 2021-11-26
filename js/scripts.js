@@ -5,22 +5,20 @@ let pokemonList = [
   {name: "Beedrill", height: 1, type: ["bug","poison"], ability: ["Swarm", "Sniper"]},
   ];
 
-let pokemonApp = (() => {
-  let getAll = () => {
-    return pokemonList
+function addListItem(pokemon) {
+  let pokemonListing = document.querySelector('.polemonList');
 }
- return {
-   getAll
- }
-})()
+  let listItem = document.createElement('li');
+  let button =document.createElement('button')
+  button.innerText = pokemon.name;
+  button.classList.add('pokemonButton','show-modal');
+  listItem.appendChild(button);
+  pokemonListing.appendChild(listItem);
 
-pokemonApp.getAll().forEach((pokemon, index, pokemonList) => {
-  if(index === 1) document.write('<ul>');
-  document.write ('<li>' + pokemon.name + ' (height: ' + pokemon.height + ')');
-  //Add a conditional to show big POKEMON
-  if (pokemon.height >= 2) {
-    document.write('- Wow That\'s big!');
-    }
-    document.write('</li>');
-    if(index === pokemonList.length) document.write('</ul>');
-})
+  //add Event Listener to button
+  button.addEventListener('click', function(event)){
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon);
+      console.log(pokemon);
+   });
+   }
